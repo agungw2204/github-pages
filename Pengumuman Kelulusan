@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengumuman Kelulusan - SMP Negeri 34 OKU</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d0e7ff;
+      text-align: center;
+      padding: 20px;
+    }
+    img.logo {
+      height: 100px;
+      margin: 10px;
+    }
+    h1, h2 {
+      margin: 5px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+    #hasil {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .lulus {
+      color: green;
+      font-weight: bold;
+    }
+    .tidak-lulus {
+      color: red;
+      font-weight: bold;
+    }
+    .countdown {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="Logo_OKU_baru.png" alt="Logo OKU" class="logo">
+    <img src="Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg.png" alt="Logo Kemdikbud" class="logo">
+    <img src="images.png" alt="Logo SMP 34 OKU" class="logo">
+  </div>
+  <h1>SMP Negeri 34 OKU</h1>
+  <h2>Pengumuman Kelulusan</h2>
+  <input type="text" id="nisn" placeholder="Masukkan NISN">
+  <br>
+  <button onclick="cekKelulusan()">Cek Kelulusan</button>
+  <div id="hasil"></div>
+  <p>Tanggal Pengumuman Kelulusan: 02 Juni 2025</p>
+  <div class="countdown" id="countdown"></div>
+
+  <script>
+    const dataKelulusan = {
+      "0096531913": { nama: "Alfin Ariya Saputra", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0091885968": { nama: "Andrias Andi Prayitno", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0107519077": { nama: "Anita Lestari", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106643140": { nama: "Beni Zakaria", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0103837828": { nama: "Beta Ah Zuni", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109591288": { nama: "Cahaya Ramadhani", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0091246344": { nama: "Cikita Alexsa Maharani", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0099209876": { nama: "Dimas Suryadi", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106400869": { nama: "Ike Saputri", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0105639815": { nama: "Junian Rangga. S", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106391864": { nama: "Melisa Ariyanti", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106468585": { nama: "Muhammad Rizky Aditia", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0092185396": { nama: "Rahmat Riduwan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0099834602": { nama: "Rava Dwi Kurniawan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0082462244": { nama: "Rizki Pratama", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106892590": { nama: "Rival Juliar", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0091608008": { nama: "Thomas Giyo Deri Pratama", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0102655745": { nama: "Windi Intan Al Khoirul", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0082414881": { nama: "Witama Ariyadi", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0104837572": { nama: "Yuli Setiyawati", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0099572364": { nama: "Zenfanya Jean Aryani", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109754778": { nama: "Aji Pangestu", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109510256": { nama: "Alfa Erjal Kristian", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0088523665": { nama: "Arif Wijaya", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0099078723": { nama: "Dea Puspita Sari", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0102215763": { nama: "Dian Amriani", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0085882764": { nama: "Dian Saputra", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0097079524": { nama: "Dominikus Ferdi Setiawan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0103784447": { nama: "Ellda Hanny Purwanti", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0105466220": { nama: "Farizi Khoirullah", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0105258580": { nama: "Gesia Khusnul Chotima", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0096421596": { nama: "Marisa", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0092561842": { nama: "Moch. Danian Rohmatul Niam", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109866305": { nama: "Olivia Intan P.S", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109304131": { nama: "Putri Ramadhani", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0105019982": { nama: "Radit Tiyan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109368999": { nama: "Rahmat Hidayat", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0096655803": { nama: "Resita Novita Sari", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0109391240": { nama: "Rivan Juliar", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0108923399": { nama: "Rizki Dwi Kurniawan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0108043007": { nama: "Soki Solawati", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0093022436": { nama: "Wahyu Irawan", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" },
+      "0106239394": { nama: "Vincensius  Paskaliano", keterangan: "Selamat Anda Dinyatakan LULUS dari SMP NEGERI 34 OKU" }
+    };
+
+    function cekKelulusan() {
+      const nisn = document.getElementById("nisn").value;
+      const hasil = document.getElementById("hasil");
+      if(dataKelulusan[nisn]) {
+        hasil.innerHTML = `<p><strong>${dataKelulusan[nisn].nama}</strong></p><p class="lulus">${dataKelulusan[nisn].keterangan}</p>`;
+      } else {
+        hasil.innerHTML = `<p class="tidak-lulus">Mohon maaf, data tidak ditemukan atau Anda belum lulus.</p>`;
+      }
+    }
+
+    // Countdown
+    const countDownDate = new Date("June 2, 2025 00:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+    const x = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownElement.innerHTML = `Pengumuman dimulai dalam: ${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+      if (distance < 0) {
+        clearInterval(x);
+        countdownElement.innerHTML = "Pengumuman telah dibuka!";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
